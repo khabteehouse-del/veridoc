@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface DocumentPreviewProps {
@@ -86,7 +86,7 @@ export default function DocumentPreview({ documentId, documentName, onClose }: D
   const renderContent = (text: string) => {
     const processed = preprocessContent(text)
     const blocks = processed.split('---BREAK---')
-    const elements: JSX.Element[] = []
+    const elements: React.ReactElement[] = []
 
     blocks.forEach((block, blockIdx) => {
       const lines = block.split('\n').filter(l => l.trim())
