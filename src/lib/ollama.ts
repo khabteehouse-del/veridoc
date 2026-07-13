@@ -1,22 +1,21 @@
-const OLLAMA_BASE_URL = process.env.OLLAMA_BASE_URL || 'http://localhost:11434'
-const HF_API_KEY = process.env.HF_API_KEY || ''
+import { ChatOllama } from '@langchain/ollama'
 
-export async function generateEmbedding(text: string): Promise<number[]> {
-  // Use Hugging Face in production, Ollama locally
-  if (HF_API_KEY) {
-    return generateEmbeddingHuggingFace(text)
-  }
-  return generateEmbeddingOllama(text)
-}
+// Initialize Ollama for chat if needed elsewhere
+export const ollama = new ChatOllama({
+  baseUrl: process.env.NEXT_PUBLIC_OLLAMA_URL || 'http://localhost:11434',
+  model: 'llama3',
+})
+
+const OLLAMA_URL = process.env.NEXT_PUBLIC_OLLAMA_URL || 'http://localhost:11434'
 
 async function generateEmbeddingOllama(text: string): Promise<number[]> {
-  const response = await fetch(`${OLLAMA_BASE_URL}/api/embeddings`, {
+  const response = await fetch(`${OLLAMA_URL}/api/embeddings`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       model: 'nomic-embed-text',
-      prompt: text
-    })
+      prompt: text,
+    }),
   })
 
   if (!response.ok) {
@@ -27,28 +26,41 @@ async function generateEmbeddingOllama(text: string): Promise<number[]> {
   return data.embedding
 }
 
+// Switched from Hugging Face to Gemini API
 async function generateEmbeddingHuggingFace(text: string): Promise<number[]> {
   const response = await fetch(
-    'https://api-inference.huggingface.co/pipeline/feature-extraction/nomic-ai/nomic-embed-text-v1',
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2:embedContent?key=${process.env.GEMINI_API_KEY}`,
     {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${HF_API_KEY}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ inputs: text, options: { wait_for_model: true } })
+      body: JSON.stringify({
+        content: {
+          parts: [{ text: text }]
+        }
+      })
     }
   )
 
   if (!response.ok) {
     const err = await response.text()
-    throw new Error(`HuggingFace embedding failed: ${err}`)
+    throw new Error(`Gemini embedding failed: ${err}`)
   }
 
   const data = await response.json()
+  
+  if (data.embedding && data.embedding.values) {
+    return data.embedding.values
+  }
+  
+  throw new Error('Unexpected Gemini response format')
+}
 
-  // HF pipeline returns nested array
-  if (Array.isArray(data) && Array.isArray(data[0])) return data[0]
-  if (Array.isArray(data)) return data
-  throw new Error('Unexpected HuggingFace response format')
+export async function generateEmbedding(text: string): Promise<number[]> {
+  // Use Gemini/HF logic if either environment variable is present, otherwise fallback to local Ollama
+  if (process.env.HF_API_KEY || process.env.GEMINI_API_KEY) {
+    return generateEmbeddingHuggingFace(text)
+  }
+  return generateEmbeddingOllama(text)
 }
