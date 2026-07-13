@@ -11,8 +11,29 @@ interface LandingPageProps {
 
 const features = [
   {
+    title: 'Contract Review Agent',
+    description: 'Autonomous 4-step agent — extraction, risk analysis, executive summary, and full review report in one click.',
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" />
+        <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Multi-Document Comparison',
+    description: 'Select multiple documents and ask comparative questions across all of them simultaneously with structured analysis.',
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <rect x="2" y="3" width="8" height="18" rx="1" stroke="currentColor" strokeWidth="2" />
+        <rect x="14" y="3" width="8" height="18" rx="1" stroke="currentColor" strokeWidth="2" />
+        <path d="M10 12h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
     title: 'RAG-Powered Q&A',
-    description: 'Ask questions in natural language. Get precise, citation-grounded answers from your documents.',
+    description: 'Ask questions in natural language. Get precise, citation-grounded answers traced back to the exact source section.',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
@@ -20,8 +41,18 @@ const features = [
     ),
   },
   {
+    title: 'Structured Extraction',
+    description: 'Extract parties, dates, obligations, risks, and governing law into a clean 12-field JSON schema automatically.',
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <polyline points="16 18 22 12 16 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <polyline points="8 6 2 12 8 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
     title: 'Executive Summaries',
-    description: 'Generate structured executive summaries with key points extracted automatically.',
+    description: 'Generate professional executive summaries with key points extracted automatically from any document.',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
@@ -32,41 +63,11 @@ const features = [
     ),
   },
   {
-    title: 'Structured Extraction',
-    description: 'Extract parties, dates, obligations, risks, and governing law into clean structured JSON.',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <polyline points="16 18 22 12 16 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        <polyline points="8 6 2 12 8 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
     title: 'Zero Data Egress',
-    description: 'All embedding generation runs locally via Ollama. Your documents never leave your environment.',
+    description: 'All embedding generation runs locally via Ollama. No document content, query, or extracted data ever leaves your environment.',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Intent Routing',
-    description: 'Automatic classification of your query into Q&A, summarization, or extraction workflows.',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" />
-        <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Vector Search',
-    description: 'pgvector-powered semantic search retrieves the most relevant document sections instantly.',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2" />
-        <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
       </svg>
     ),
   },
@@ -138,9 +139,9 @@ const featureTechDetails: Record<string, string[]> = {
   'RAG-Powered Q&A': ['pgvector similarity search', 'nomic-embed-text embeddings', 'Llama 3.3 70B via Groq', 'Citation-grounded responses'],
   'Executive Summaries': ['Top-10 chunk retrieval', 'Structured JSON output', 'Key point extraction', 'Document-grounded only'],
   'Structured Extraction': ['12-field JSON schema', 'Parties, dates, obligations', 'Risk identification', 'Governing law detection'],
+  'Contract Review Agent': ['4-step autonomous pipeline', 'Extraction + Risk + Summary', 'Red flag identification', 'Professional conclusion'],
+  'Multi-Document Comparison': ['Cross-document retrieval', 'Structured per-doc analysis', 'Similarity and differences', 'Any document type'],
   'Zero Data Egress': ['Ollama local embeddings', 'Air-gapped processing', 'No third-party data sharing', 'Enterprise compliant'],
-  'Intent Routing': ['3-class classifier', 'Q&A / Summarize / Extract', 'Confidence scoring', 'Deterministic routing'],
-  'Vector Search': ['pgvector cosine similarity', 'IVFFlat index', '768-dimension vectors', 'Threshold filtering'],
 }
 
 function FeatureCard({ feature, index }: { feature: typeof features[0]; index: number }) {
@@ -353,8 +354,7 @@ export default function LandingPage({ onLaunch }: LandingPageProps) {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-base text-muted-foreground max-w-xl mx-auto leading-relaxed"
           >
-            Upload a contract. Ask questions in plain English. Extract structured data.
-            Get citation-grounded answers — all without a single byte leaving your environment.
+            Upload contracts and documents. Ask questions, generate summaries, extract structured data, run autonomous agent reviews, and compare multiple documents — all without a single byte leaving your environment.
           </motion.p>
 
           <motion.div
@@ -374,11 +374,30 @@ export default function LandingPage({ onLaunch }: LandingPageProps) {
         </div>
       </section>
 
-      {/* Stats */}
+      {/* Stats — compact inline row */}
       <section className="relative z-10 max-w-5xl mx-auto px-6 pb-16">
-        <div className="grid grid-cols-4 gap-4">
-          {stats.map((stat, index) => (
-            <StatCard key={stat.label} stat={stat} index={index} />
+        <div className="flex items-center justify-center gap-2 flex-wrap">
+          {[
+            { value: 'Local', label: 'Embeddings' },
+            { value: 'pgvector', label: 'Vector Storage' },
+            { value: 'LLaMA 3.3', label: 'Language Model' },
+            { value: 'Zero', label: 'Data Egress' },
+          ].map((stat, index) => (
+            <div key={stat.label} className="flex items-center gap-2">
+              <div
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs"
+                style={{
+                  background: '#06B6D40a',
+                  border: '1px solid #06B6D422',
+                }}
+              >
+                <span className="font-semibold" style={{ color: '#06B6D4' }}>{stat.value}</span>
+                <span style={{ color: 'oklch(0.5 0 0)' }}>{stat.label}</span>
+              </div>
+              {index < 3 && (
+                <span style={{ color: 'oklch(0.3 0 0)', fontSize: '10px' }}>·</span>
+              )}
+            </div>
           ))}
         </div>
       </section>
