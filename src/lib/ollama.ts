@@ -29,27 +29,26 @@ async function generateEmbeddingOllama(text: string): Promise<number[]> {
 
 async function generateEmbeddingHuggingFace(text: string): Promise<number[]> {
   const response = await fetch(
-    'https://api-inference.huggingface.co/models/nomic-ai/nomic-embed-text-v1',
+    'https://api-inference.huggingface.co/pipeline/feature-extraction/nomic-ai/nomic-embed-text-v1',
     {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${HF_API_KEY}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ inputs: text })
+      body: JSON.stringify({ inputs: text, options: { wait_for_model: true } })
     }
   )
 
   if (!response.ok) {
-    throw new Error(`HuggingFace embedding failed: ${response.statusText}`)
+    const err = await response.text()
+    throw new Error(`HuggingFace embedding failed: ${err}`)
   }
 
   const data = await response.json()
 
-  // HF returns nested array for sentence transformers
-  if (Array.isArray(data) && Array.isArray(data[0])) {
-    return data[0]
-  }
-
-  return data
+  // HF pipeline returns nested array
+  if (Array.isArray(data) && Array.isArray(data[0])) return data[0]
+  if (Array.isArray(data)) return data
+  throw new Error('Unexpected HuggingFace response format')
 }
