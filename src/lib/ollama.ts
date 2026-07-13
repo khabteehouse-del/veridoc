@@ -28,17 +28,15 @@ async function generateEmbeddingOllama(text: string): Promise<number[]> {
 
 async function generateEmbeddingGoogle(text: string): Promise<number[]> {
   const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${GOOGLE_API_KEY}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/embedding-001:embedContent?key=${GOOGLE_API_KEY}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'models/text-embedding-004',
+        model: 'models/embedding-001',
         content: {
           parts: [{ text }]
-        },
-        taskType: 'RETRIEVAL_DOCUMENT',
-        outputDimensionality: 768
+        }
       })
     }
   )
