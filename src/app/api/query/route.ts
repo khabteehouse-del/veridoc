@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
       success: true,
       question,
       answer: result.answer,
-      sources: result.chunks.map((chunk, index) => ({
+      sources: result.chunks.map((chunk: { content: string; similarity: number; chunk_index: number }, index: number) => ({
         source_number: index + 1,
         content_preview: chunk.content.substring(0, 150) + '...',
         similarity_score: chunk.similarity,
