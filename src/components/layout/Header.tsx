@@ -10,6 +10,8 @@ interface HeaderProps {
 }
 
 export default function Header({ onNavigateHome, onNavigateLibrary, currentView }: HeaderProps) {
+  const isLanding = currentView === 'landing'
+
   return (
     <motion.header
       initial={{ opacity: 0, y: -20 }}
@@ -26,10 +28,7 @@ export default function Header({ onNavigateHome, onNavigateLibrary, currentView 
             onClick={onNavigateHome}
             whileHover={{ opacity: 0.8 }}
           >
-            <div
-              className="relative flex-shrink-0"
-              style={{ width: '40px', height: '40px' }}
-            >
+            <div className="relative flex-shrink-0" style={{ width: '40px', height: '40px' }}>
               <Image
                 src="/logo-icon.png"
                 alt="Veridoc"
@@ -42,35 +41,24 @@ export default function Header({ onNavigateHome, onNavigateLibrary, currentView 
             <span className="text-lg font-semibold tracking-tight text-foreground">Veridoc</span>
           </motion.div>
 
-          {/* Navigation links */}
-          <nav className="hidden sm:flex items-center gap-1">
-            <motion.button
-              onClick={onNavigateHome}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-3 py-1.5 rounded-lg text-xs transition-colors"
-              style={{
-                color: currentView === 'landing' ? '#06B6D4' : 'oklch(0.6 0 0)',
-                background: currentView === 'landing' ? '#06B6D410' : 'transparent',
-                border: currentView === 'landing' ? '1px solid #06B6D433' : '1px solid transparent',
-              }}
-            >
-              Home
-            </motion.button>
-            <motion.button
-              onClick={onNavigateLibrary}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-3 py-1.5 rounded-lg text-xs transition-colors"
-              style={{
-                color: currentView === 'library' ? '#06B6D4' : 'oklch(0.6 0 0)',
-                background: currentView === 'library' ? '#06B6D410' : 'transparent',
-                border: currentView === 'library' ? '1px solid #06B6D433' : '1px solid transparent',
-              }}
-            >
-              Library
-            </motion.button>
-          </nav>
+          {/* Show Library link only when NOT on landing page */}
+          {!isLanding && onNavigateLibrary && (
+            <nav className="hidden sm:flex items-center gap-1">
+              <motion.button
+                onClick={onNavigateLibrary}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="px-3 py-1.5 rounded-lg text-xs transition-colors"
+                style={{
+                  color: currentView === 'library' ? '#06B6D4' : 'oklch(0.6 0 0)',
+                  background: currentView === 'library' ? '#06B6D410' : 'transparent',
+                  border: currentView === 'library' ? '1px solid #06B6D433' : '1px solid transparent',
+                }}
+              >
+                Library
+              </motion.button>
+            </nav>
+          )}
         </div>
 
         {/* Right — status */}

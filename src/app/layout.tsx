@@ -17,7 +17,9 @@ export const metadata: Metadata = {
   title: 'Veridoc — Enterprise Document Intelligence',
   description: 'AI-powered contract analysis, extraction and Q&A',
   icons: {
-    icon: '/logo-icon.png',
+    icon: [
+      { url: '/logo-icon.png', type: 'image/png' },
+    ],
     apple: '/logo-icon.png',
     shortcut: '/logo-icon.png',
   },
@@ -34,6 +36,11 @@ export default function RootLayout({
       className={`dark ${geistSans.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="icon" type="image/png" href="/logo-icon.png" />
+        <link rel="shortcut icon" href="/logo-icon.png" />
+        <link rel="apple-touch-icon" href="/logo-icon.png" />
+      </head>
       <body className="min-h-screen bg-background antialiased">
         {children}
         <Toaster richColors position="top-right" />
