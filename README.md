@@ -8,7 +8,7 @@
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-veridoc--two.vercel.app-06B6D4?style=for-the-badge&logo=vercel)](https://veridoc-two.vercel.app)
 [![GitHub](https://img.shields.io/badge/GitHub-khabteehouse--del-181717?style=for-the-badge&logo=github)](https://github.com/khabteehouse-del/veridoc)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Faraz-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/beyondtahir/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Faraz-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/farazakhtar1980/)
 
 </div>
 
@@ -338,7 +338,7 @@ veridoc/
 
 22 years of enterprise experience spanning database administration, project management, international stakeholder engagement, and media — now building production AI systems.
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat&logo=linkedin)](https://www.linkedin.com/in/beyondtahir/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Faraz%20Akhtar-0A66C2?style=flat&logo=linkedin)](https://www.linkedin.com/in/farazakhtar1980/)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=flat&logo=github)](https://github.com/khabteehouse-del)
 
 ---
