@@ -11,6 +11,9 @@
   "dependencies": {
     "@ai-sdk/groq": "^4.0.3",
     "@gsap/react": "^2.1.2",
+    "@langchain/anthropic": "^1.5.8",
+    "@langchain/core": "^1.2.9",
+    "@langchain/langgraph": "^1.4.12",
     "@langchain/textsplitters": "^1.0.1",
     "@supabase/supabase-js": "^2.110.0",
     "@tanem/react-nprogress": "^6.0.3",
