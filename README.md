@@ -124,6 +124,22 @@ The live demo at https://veridoc-two.vercel.app needs no login. Treat it as publ
 
 ---
 
+## Contract Review Agent Flow
+
+```mermaid
+flowchart LR
+    S["Start"] --> E["Extract clauses"]
+    E --> R["Assess risk"]
+    R --> U["Executive summary"]
+    U --> P["Produce report"]
+    P --> V{"Citations verified?"}
+    V -- "Yes" --> D["Done"]
+    V -- "No, retries left (max 2)" --> P
+    V -- "No, retries used up" --> D
+```
+
+---
+
 ## Getting Started
 
 ### Prerequisites
