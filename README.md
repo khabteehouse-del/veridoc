@@ -209,12 +209,18 @@ as $$
   limit match_count;
 $$;
 
--- Grant permissions
+-- WARNING: LOCAL TESTING AND DEMO ONLY.
+-- Veridoc has no user login yet, so these lines open the two tables to anyone
+-- who has your Supabase URL and anon key. Do not use them with real or
+-- confidential documents. Before real use, add Supabase Auth and replace
+-- these lines with row-level security policies.
 grant all on documents to anon, authenticated;
 grant all on chunks to anon, authenticated;
 alter table documents disable row level security;
 alter table chunks disable row level security;
 ```
+
+> **Security note:** the SQL above disables row-level security so the demo works without sign-in. Treat the demo as public, and do not upload confidential contracts. Supabase Auth with per-user isolation is on the roadmap.
 
 ### Environment Variables
 
