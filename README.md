@@ -22,6 +22,12 @@ Built with regulated industries in the UAE and GCC market in mind, where data pr
 
 ---
 
+## Demo Access
+
+The live demo at https://veridoc-two.vercel.app needs no login. Treat it as public and do not upload confidential contracts.
+
+---
+
 ## Features
 
 ### Core Intelligence
